@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>后台管理</title>
+    <include file="Common/meta" />
+    <include file="Common/header" />
+    <link rel="stylesheet" type="text/css" href="/Public/Admin/styles/login.css">
+</head>
+<style type="text/css">
+.index-title {
+    line-height: 26px;
+}
+
+.index-title i {
+    font-style: normal;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: .1em;
+    vertical-align: bottom;
+}
+
+.index-title span {
+    font-size: 20px;
+    line-height: 18px;
+    vertical-align: bottom;
+}
+</style>
+
+<body>
+    <header>
+        <img src="/Public/Admin/image/index_top_logo.png">
+        <p class="index-title">
+            You优生活圈后台管理系统<i>(<span>V1.0</span>)</i>
+        </p>
+    </header>
+    <section>
+        <h3>
+	        <div id="triangle"></div>
+	        用户登录
+	      </h3>
+        <form>
+            <div class="aaa">
+                <div class="bbb">
+                    <img src="__PUBLIC__/Admin/image/person-grey.jpg" class="ccc">
+                </div>
+                <input type="text" placeholder="手机号" id="phone">
+            </div>
+            <div class="aaa">
+                <div class="bbb">
+                    <img src="__PUBLIC__/Admin/image/lock-grey.jpg" class="ccc">
+                </div>
+                <input type="password" autocomplete="new-password" placeholder="密码" id="password">
+            </div>
+            <input type="checkbox" id="remember"> 记住密码
+            <input type="button" value="立即登陆" id="submit">
+        </form>
+    </section>
+    <footer>
+        <hr>
+        <p style="font-size: 15px !important;">&copy; 2017-2027 山东牵互网络科技有限公司</p>
+    </footer>
+    <include file="Common/footer" />
+    <script type="text/javascript">
+    (function() {
+        var Index = function() {
+            this.init();
+        };
+        Index.prototype = {
+            init: function() {
+                this.remember();
+                this.submit();
+                this.behaviorGroup();
+            },
+            remember: function() {
+                if (Cookies.get('adminRemember') === 'true') {
+                    $('#phone').val(Cookies.get('adminUsername') || '').prev().find('img').attr('src', '/Public/Admin/image/person-red.png');
+                    $('#password').val(Cookies.get('adminPassword') || '').prev().find('img').attr('src', '/Public/Admin/image/lock-red.png');
+                    $('#remember').click();
+                }
+                base = window.location.href;
+            },
+            getBase: function() {
+                var s = window.location.href;
+                if (s.indexOf('index.php') > 0) {
+                    return s.split('index.php')[0];
+                }
+                if (s[s.length - 1] !== '/') {
+                    s += '/';
+                }
+                return s;
+            },
+            submit: function() {
+            	var self = this;
+                $("#submit").click(function(e) {
+                    e.preventDefault();
+
+                    var username = $('#phone');
+                    var password = $('#password');
+                    var remember = $('#remember');
+
+                    var usernameV = username.val().trim();
+                    var verifyCodeV = verifyCode.val().trim();
+                    var passwordV = password.val().trim();
+                    var rememberV = remember.is(':checked');
+
+                    if (!usernameV || !passwordV){
+                        return desktopModal.alert('必须全部输入');
+                    }
+
+                    var url = self.getBase() + 'index.php/Admin/Admin/doLogin';
+
+                    var data = {
+                        phone: usernameV,
+                        password: passwordV
+                    };
+
+                    $.post(url, data, function(res) {
+                        if (res.code !== 0) {
+                            return desktopModal.alert(res.msg);
+                        }
+
+                        Cookies.set('adminUsername', usernameV, {
+                            expires: 30
+                        });
+                        Cookies.set('adminPassword', passwordV, {
+                            expires: 30
+                        });
+                        Cookies.set('adminRemember', rememberV, {
+                            expires: 30
+                        });
+                        return window.location.href = self.getBase() + 'index.php/Admin/Index/main';
+                    });
+                });
+            },
+            behaviorGroup: function() {
+                $('body').keypress(function(e) {
+                    // 回车键
+                    if (e.which === 13) {
+                        $("#submit").click();
+                    }
+                });
+
+                $('#phone').focus(function() {
+                    var that = $(this);
+                    that.prev().find('img').attr('src', '/Public/Admin/image/person-red.png');
+                }).blur(function() {
+                    var that = $(this);
+                    if (that.val().trim() === '')
+                        that.prev().find('img').attr('src', '/Public/Admin/image/person-grey.jpg');
+                });
+
+                $('#password').focus(function() {
+                    var that = $(this);
+                    that.prev().find('img').attr('src', '/Public/Admin/image/lock-red.png');
+                }).blur(function() {
+                    var that = $(this);
+                    if (that.val().trim() === '')
+                        that.prev().find('img').attr('src', '/Public/Admin/image/lock-grey.jpg');
+                });
+            }
+        };
+        new Index();
+    })();
+    </script>
+</body>
+
+</html>

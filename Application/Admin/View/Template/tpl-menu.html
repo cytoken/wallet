@@ -1,0 +1,31 @@
+<script id="menu-tpl" type="text/html">
+    {{each menus as menu i}}
+        {{if menu.weight == 1 || menu.weight == 12}}
+            <li>
+                <a href="__APP__/{{#menu.url}}">
+                    <span class="am-icon-{{menu.icon}} am-icon-sm"></span>{{#menu.name}}
+                </a>
+            </li>
+        {{/if}}
+        {{if menu.weight != 1 && menu.weight != 12}}
+            <li>
+                <a class="am-cf" data-am-collapse="{target: '#collapse-{{#menu.name}}-nav'}">
+                    <span class="am-icon-{{menu.icon}}"></span> {{#menu.name}}
+                    <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                </a>
+                {{if menu.menus}}
+                    <ul class="am-list am-collapse admin-sidebar-sub {{menu.isclose?'':'am-in'}}" id="collapse-{{#menu.name}}-nav">
+                        {{each menu.menus as cMenu i}}
+                        <li>
+                            <a href="__APP__/{{#cMenu.url}}" class="am-cf">
+                                <span class="am-icon-{{cMenu.icon}} {{cMenu.pending?'icon-pending':''}}"></span> <span class="{{cMenu.pending?'icon-pending':''}}">{{#cMenu.name}}</span>
+                                <span class="am-badge am-badge-secondary am-margin-right am-fr"></span>
+                            </a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+            </li>
+        {{/if}}
+    {{/each}}
+</script>
