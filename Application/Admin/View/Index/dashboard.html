@@ -1,0 +1,254 @@
+<style>
+	#x-detail {
+		display: none;
+	}
+
+	#slider,
+	#slider_user,
+	#slider_job {
+		width: 100%;
+		margin: 30px auto 0 auto;
+	}
+
+	#collapse-panel-pv {
+		height: 550px;
+	}
+
+	.div_hide {
+		display: none;
+	}
+</style>
+<div class="admin-content-body">
+	<div class="am-cf am-padding">
+		<div class="am-fl am-cf">
+			<strong class="am-text-primary am-text-lg">首页</strong> / <small>仪表盘</small>
+		</div>
+	</div>
+	<ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+		<li><a href="#" class="am-text-success "><span
+						class="am-icon-btn am-icon-user " ></span><br />+用户/日<br /><div id='newIncreaseUser'></div></a></li>
+		<li><a href="#" class="am-text-warning "><span
+						class="am-icon-btn am-icon-briefcase"></span><br />+企业/日<br /><div id='newIncreaseComp'></div></a></li>
+		<li><a href="#" class="am-text-danger "><span
+						class="am-icon-btn am-icon-recycle "></span><br />+职位/日<br /><div id='newIncreaseJob'></div></a></li>
+		<li>
+			<a href="#" class="am-text-secondary">
+				<span class="am-icon-btn am-icon-user-md"></span><br /> +申请/日
+				<br />
+				<div id='newIncreaseApply'></div>
+			</a>
+		</li>
+
+	</ul>
+	<ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list cityManagerHide">
+		<li><a href="#" class="am-text-success "><span
+
+						class="am-icon-btn am-icon-male " ></span><br />PV/日<br /><div id='pvCount'></div></a></li>
+
+		<li><a href="#" class="am-text-warning "><span
+
+						class="am-icon-btn am-icon-child"></span><br />UV/日<br /><var id='uvCount'></var></a></li>
+
+		<li><a href="#" class="am-text-danger "><span
+						class="am-icon-btn am-icon-recycle "></span><br />日活<br /><var id=''>0</var></a></li>
+		<li>
+			<a href="#" class="am-text-secondary">
+				<span class="am-icon-btn am-icon-user-md"></span><br /> 月活
+				<br /><var id=''>0</var> </a>
+		</li>
+
+	</ul>
+
+	<div class="am-g cityManagerHide">
+		<div class="am-u-sm-6">
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-pv'}">
+					用户活度<span class="am-icon-chevron-down am-fr"></span>
+				</div>
+				<div id="collapse-panel-pv" class="am-in" style="margin: 20px 30px 0 30px;">
+					<div class="am-u-sm-12 am-u-md-4" style="margin-right: 60px;padding: 0;">
+						<div class="am-form-group am-form-icon">
+							<i class="am-icon-calendar"></i> <input id="startDate" type="text" class="am-form-field am-input-sm" placeholder=" 开始日期" data-am-datepicker readonly>
+						</div>
+					</div>
+					<div class="am-u-sm-12 am-u-md-4" style="margin-right: 60px;padding: 0;">
+						<div class="am-form-group am-form-icon">
+							<i class="am-icon-calendar"></i> <input id="endDate" type="text" class="am-form-field am-input-sm" placeholder=" 结束日期" data-am-datepicker readonly>
+						</div>
+					</div>
+					<div class="am-form-group am-u-sm-1" style="float: right;margin-right: 15px;">
+						<button id="x-nav-search" type="button" class="am-btn am-btn-primary am-btn-sm">确认</button>
+					</div>
+					<canvas id="puv" width="1600px" height="860px"></canvas>
+					<div id="slider"></div>
+				</div>
+			</div>
+
+		</div>
+		<div class="am-u-sm-6">
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-uv'}">
+					用户分布<span class="am-icon-chevron-down am-fr"></span>
+				</div>
+				<div id="collapse-panel-uv" class="am-in" style="margin:20px;">
+					<canvas id="uv"></canvas>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="am-g cityManagerShow">
+		<div class="am-u-sm-6">
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-user'}">
+					用户活度<span class="am-icon-chevron-down am-fr"></span>
+				</div>
+				<div id="collapse-panel-user" class="am-in" style="margin: 20px 30px 0 30px;">
+					<div class="am-u-sm-12 am-u-md-4" style="margin-right: 60px;padding: 0;">
+						<div class="am-form-group am-form-icon">
+							<i class="am-icon-calendar"></i> <input id="startDate_user" type="text" class="am-form-field am-input-sm" placeholder=" 开始日期" data-am-datepicker readonly>
+						</div>
+					</div>
+					<div class="am-u-sm-12 am-u-md-4" style="margin-right: 60px;padding: 0;">
+						<div class="am-form-group am-form-icon">
+							<i class="am-icon-calendar"></i> <input id="endDate_user" type="text" class="am-form-field am-input-sm" placeholder=" 结束日期" data-am-datepicker readonly>
+						</div>
+					</div>
+					<div class="am-form-group am-u-sm-1" style="float: right;margin-right: 15px;">
+						<button id="userChartBtn" type="button" class="am-btn am-btn-primary am-btn-sm">确认</button>
+					</div>
+					<canvas id="chart_user" width="1600px" height="860px"></canvas>
+					<div id="slider_user"></div>
+				</div>
+			</div>
+		</div>
+		<div class="am-u-sm-6">
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-job'}">
+					职位申请<span class="am-icon-chevron-down am-fr"></span>
+				</div>
+				<div id="collapse-panel-job" class="am-in" style="margin: 20px 30px 0 30px;">
+					<div class="am-u-sm-12 am-u-md-4" style="margin-right: 60px;padding: 0;">
+						<div class="am-form-group am-form-icon">
+							<i class="am-icon-calendar"></i> <input id="startDate_job" type="text" class="am-form-field am-input-sm" placeholder=" 开始日期" data-am-datepicker readonly>
+						</div>
+					</div>
+					<div class="am-u-sm-12 am-u-md-4" style="margin-right: 60px;padding: 0;">
+						<div class="am-form-group am-form-icon">
+							<i class="am-icon-calendar"></i> <input id="endDate_job" type="text" class="am-form-field am-input-sm" placeholder=" 结束日期" data-am-datepicker readonly>
+						</div>
+					</div>
+					<div class="am-form-group am-u-sm-1" style="float: right;margin-right: 15px;">
+						<button id="jobChartBtn" type="button" class="am-btn am-btn-primary am-btn-sm">确认</button>
+					</div>
+					<canvas id="chart_job" width="1600px" height="860px"></canvas>
+					<div id="slider_job"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="am-g" style="display:none">
+		<div class="am-u-md-6">
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">
+					访问量<span class="am-icon-chevron-down am-fr"></span>
+				</div>
+				<div id="collapse-panel-2" class="am-in">
+					<table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+						<tbody>
+							<tr>
+								<th class="am-text-center">#</th>
+								<th>平台</th>
+								<th>访问量</th>
+							</tr>
+							<tr>
+								<td class="am-text-center"><img src="__PUBLIC__/images/icon/eg/admin-chrome.png" alt=""></td>
+								<td>微信公众号</td>
+								<td id="wechatCount"></td>
+							</tr>
+							<tr>
+								<td class="am-text-center"><img src="__PUBLIC__/images/icon/eg/admin-firefox.png" alt=""></td>
+								<td>用户APP</td>
+								<td>2,505</td>
+							</tr>
+							<tr>
+								<td class="am-text-center"><img src="__PUBLIC__/images/icon/eg/admin-ie.png" alt=""></td>
+								<td>企业APP</td>
+								<td>1,405</td>
+							</tr>
+							<tr>
+								<td class="am-text-center"><img src="__PUBLIC__/images/icon/eg/admin-opera.png" alt=""></td>
+								<td>PC入口</td>
+								<td>4,005</td>
+							</tr>
+							<tr>
+								<td class="am-text-center"><img src="__PUBLIC__/images/icon/eg/admin-safari.png" alt=""></td>
+								<td>第3方平台</td>
+								<td>505</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="am-u-md-6">
+
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">
+					最近留言<span class="am-icon-chevron-down am-fr"></span>
+				</div>
+				<div class="am-panel-bd am-collapse am-in am-cf" id="collapse-panel-3">
+					<ul class="am-comments-list admin-content-comment">
+						<li class="am-comment">
+							<a href="#"><img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96" alt="" class="am-comment-avatar" width="48" height="48"></a>
+							<div class="am-comment-main">
+								<header class="am-comment-hd">
+									<div class="am-comment-meta">
+										<a href="#" class="am-comment-author">某人</a> 评论于
+										<time>2014-7-12 15:30</time>
+									</div>
+								</header>
+								<div class="am-comment-bd">
+									<p>遵循 “移动优先（Mobile First）”、“渐进增强（Progressive enhancement）”的理念，可先从移动设备开始开发网站，逐步在扩展的更大屏幕的设备上，专注于最重要的内容和交互，很好。
+									</p>
+								</div>
+							</div>
+						</li>
+
+						<li class="am-comment">
+							<a href="#"><img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96" alt="" class="am-comment-avatar" width="48" height="48"></a>
+							<div class="am-comment-main">
+								<header class="am-comment-hd">
+									<div class="am-comment-meta">
+										<a href="#" class="am-comment-author">某人</a> 评论于
+										<time>2014-7-12 15:30</time>
+									</div>
+								</header>
+								<div class="am-comment-bd">
+									<p>有效减少为兼容旧浏览器的臃肿代码；基于 CSS3 的交互效果，平滑、高效。AMUI专注于现代浏览器（支持HTML5），不再为过时的浏览器耗费资源，为更有价值的用户提高更好的体验。
+									</p>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+					<ul class="am-pagination am-fr admin-content-pagination">
+						<li class="am-disabled"><a href="#">&laquo;</a></li>
+						<li class="am-active"><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#">&raquo;</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/scripts/index/index.js"></script>
+<script src="/Public/scripts/index/createChart.js"></script>

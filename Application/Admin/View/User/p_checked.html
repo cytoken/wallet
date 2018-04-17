@@ -1,0 +1,647 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <include file="Common/meta"/>
+    <title>用户 | 萝卜兼职</title>
+    <include file="Common/header"/>
+    <include file="Common/modal"/>
+    <style>
+        #x-detail {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器， 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+    以获得更好的体验！</p>
+<![endif]-->
+<header class="am-topbar am-topbar-inverse admin-header">
+    <include file="Weight/topbar"/>
+</header>
+
+<div class="am-cf admin-main">
+    <!-- sidebar start -->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+
+            <ul class="am-list admin-sidebar-list" id="x-sidebar">
+                <include file="Weight/sidebar"/>
+            </ul>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-bookmark"></span>公告</p>
+                    <p>捷城管理系统v1.0！ </p>
+                </div>
+            </div>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p>
+                        <span class="am-icon-tag"></span> wiki
+                    </p>
+                    <p>更多7*24技术支持， jiechengkeji.cn。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="admin-content">
+
+        <!-- 列表 start -->
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg">认证用户</strong> / <small>列表</small>
+                </div>
+            </div>
+            <hr>
+            <!-- 列表-nav start-->
+            <div class="am-g">
+
+                <div class="am-u-sm-12 am-u-md-1">
+                    <div class="am-form-group">
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-sm">
+                                <button type="button" class="am-btn am-btn-primary"
+                                        id='user-export'>
+                                    <span class="am-icon-save"></span> Excel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-2">
+                    <div class="am-form-group">
+                        <select id="nav-province" data-am-selected="{btnSize: 'sm'}">
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-2">
+                    <div class="am-form-group">
+                        <select id="nav-city" data-am-selected="{btnSize: 'sm'}">
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-2">
+                    <div class="am-form-group">
+                        <select id="nav-school" data-am-selected="{btnSize: 'sm'}">
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-2">
+                    <div class="am-form-group am-form-icon">
+                        <i class="am-icon-calendar"></i> <input id="startDate"
+                                                                type="text" class="am-form-field am-input-sm" placeholder="开始日期"
+                                                                data-am-datepicker readonly>
+                    </div>
+                </div>
+
+
+                <div class="am-u-sm-12 am-u-md-2">
+                    <div class="am-form-group am-form-icon">
+                        <i class="am-icon-calendar"></i> <input id="endDate" type="text"
+                                                                class="am-form-field am-input-sm" placeholder="结束日期"
+                                                                data-am-datepicker readonly>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-1">
+                    <button id="doSearch" type="button"
+                            class="am-btn am-btn-primary am-btn-sm">确认</button>
+                </div>
+            </div>
+            <!-- 列表-nav end-->
+            <br />
+            <!-- 列表 start-->
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table id="x-table"
+                               class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>用户名</th>
+                                <th>真名</th>
+                                <th>电话</th>
+                                <th>性别</th>
+                                <th>省</th>
+                                <th>城市</th>
+                                <th>学校</th>
+                                <th>创建时间</th>
+                                <th>修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <!-- 列表 end-->
+
+        </div>
+
+        <!-- detail start -->
+        <div id='detailForm'
+             class="admin-content-body am-animation-slide-right"></div>
+
+
+        <!-- detail end -->
+
+        <footer class="admin-content-footer">
+            <hr>
+            <p class="am-padding-left">© 2016-2026 威海捷城信息技术有限公司版权所有。</p>
+        </footer>
+    </div>
+    <!-- content end -->
+</div>
+
+<a href="#"
+   class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+   data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+    <hr>
+    <p class="am-padding-left">© 2016-2026 威海捷城信息技术有限公司版权所有。</p>
+</footer>
+
+<script type="text/html" id="formTemplate">
+
+
+
+    <div class="am-cf am-padding am-padding-bottom-0" >
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">用户</strong> /
+            <small>详情</small>
+        </div>
+    </div>
+    <hr>
+    <div class="am-tabs am-margin" data-am-tabs>
+        <ul class="am-tabs-nav am-nav am-nav-tabs">
+            <li class="am-active"><a href="#xAdmin-tab">基本信息</a></li>
+        </ul>
+
+        <div class="am-tabs-bd">
+            <div class="am-tab-panel am-fade am-in am-active" id="xAdmin-tab">
+                <form class="am-form" data-am-validator >
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">个人头像</div>
+                        <div class="am-u-sm-8 am-u-md-4 am-u-end">
+                            <img id="userPortrait" src="{{headimgurl || '/Public/images/icon/default_head.png'}}" width="140" height="140"/>
+                            <div class="am-form-group am-form-file am-form-inline">
+                                <i class="am-icon-cloud-upload"> </i> 更换头像
+                                <input id="doc-form-file" type="file">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">用户名</div>
+                        <div class="am-u-sm-4 am-u-md-6 am-u-end">
+                            <input type="text" class=""  value="{{username}}" placeholder="输入姓名" readonly="readonly" >
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">真实姓名</div>
+                        <div class="am-u-sm-2 am-u-md-6 am-u-end">
+                            <input type="text" class="" value="{{realname}}" placeholder="输入姓名" readonly="readonly" >
+                        </div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">邀请码</div>
+                        <div class="am-u-sm-4 am-u-md-6 am-u-end">
+                            <input type="email" class="" id="doc-ipt-email-1 js-pattern-email" value="{{invitecode}}" placeholder="" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">状态</div>
+                        <div class="am-u-sm-2 am-u-md-2">
+                            <input type="text" class="" value="{{status}}"  readonly="readonly" >
+                        </div>
+
+                        <div class="am-u-sm-2 am-u-md-1 am-text-right">创建时间</div>
+                        <div class="am-u-sm-4 am-u-md-3 am-u-end">
+                            <input type="text" class="" value="{{createtime}}" placeholder="创建时间" readonly="readonly" >
+                        </div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">性别</div>
+                        <div class="am-u-sm-2 am-u-md-2">
+                            <input type="text" class="" value="{{gender}}" placeholder="输入性别" readonly="readonly" >
+                        </div>
+
+                        <div class="am-u-sm-2 am-u-md-1 am-text-right">生日</div>
+                        <div class="am-u-sm-4 am-u-md-3 am-u-end">
+                            <input type="text" class="" value="{{birthday}}" placeholder="输入生日" readonly="readonly" >
+                        </div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">学校</div>
+                        <div class="am-u-sm-4 am-u-md-6 am-u-end">
+                            <input type="email" class="" id="doc-ipt-email-1 js-pattern-email" value="{{school}}" placeholder="输入学校名称" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">专业</div>
+                        <div class="am-u-sm-4 am-u-md-6 am-u-end">
+                            <input type="email" class="" id="doc-ipt-email-1 js-pattern-email" value="{{major}}" placeholder="输入专业" readonly="readonly">
+                        </div>
+                    </div>
+
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">年级</div>
+                        <div class="am-u-sm-2 am-u-md-2">
+                            <input type="text" class="" value="{{grade}}" placeholder="输入年级" readonly="readonly" >
+                        </div>
+
+                        <div class="am-u-sm-2 am-u-md-1 am-text-right">学历</div>
+                        <div class="am-u-sm-4 am-u-md-3 am-u-end">
+                            <input type="text" class="" value="{{degree}}" placeholder="学历" readonly="readonly" >
+                        </div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">电子邮件</div>
+                        <div class="am-u-sm-4 am-u-md-6 am-u-end">
+                            <input type="email" class="" id="doc-ipt-email-1 js-pattern-email" value="{{email}}" placeholder="输入电子邮件" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">地址</div>
+                        <div class="am-u-sm-4 am-u-md-6 am-u-end">
+                            <input type="email" class="" id="doc-ipt-email-1 js-pattern-email" value="{{address}}" placeholder="输入地址" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">个人简介</div>
+                        <div class="am-u-sm-4 am-u-md-6 am-u-end">
+                            <textarea class="" rows="5" id="doc-ta-1" readonly="readonly">{{intro}}</textarea>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+        <!-- <div class="am-margin">
+            <button type="button" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+            <button type="button" class="am-btn am-btn-primary am-btn-xs">放弃保存</button>
+        </div> -->
+    </div>
+
+
+</script>
+
+
+
+
+<include file="Common/footer"/>
+
+<script id="x-table-opt-tpl" type="text/html">
+    <div class="am-btn-toolbar">
+        <div class="am-btn-group am-btn-group-xs">
+
+            <button type="button" action="seeDetail" class="am-btn am-btn-default am-btn-xs am-hide-sm-only tc_look">
+                <span class="am-icon-copy"></span>查看
+            </button>
+
+            {{if status==1}}
+            <button type="button" action="refuse" class="am-btn am-btn-default am-btn-xs am-text-danger tc_ban">
+                <span class="am-icon-copy"></span>禁用
+            </button>
+            {{else if  status==0}}
+            <button type="button" action="active" class="am-btn am-btn-default am-btn-xs am-text-primary tc_allow">
+                <span class="am-icon-copy"></span>通过
+            </button>
+            {{else if  status==2}}
+            <button type="button" action="active" class="am-btn am-btn-default am-btn-xs am-text-primary tc_start">
+                <span class="am-icon-copy"></span>启用
+            </button>
+            {{else}}
+
+            {{/if}}
+
+
+        </div>
+    </div>
+</script>
+
+<script id="gp-select-tpl" type="text/html">
+    {{each list as value index}}
+    <li><option value={{value.id}}>{{value.name}}</option></li>
+    {{/each}}
+</script>
+
+<script>
+    $(function() {
+
+        $.post(MOD_PATH+"/Gp/getCities", {}, function(res) {
+
+            $("#nav-province").html(template('gp-select-tpl', {
+                list : res
+            }));
+            $("#nav-province").on('change', function() {
+                var ps = [];
+                res.forEach(function (p) {
+                    ps.push(p.id);
+                });
+                $("#nav-city").html(template('gp-select-tpl', {
+                    list : res[ps.join('').indexOf($(this).val())]['cities']
+                })).trigger('change');//手动触发
+            });
+            $("#nav-province").trigger('change');//手动触发
+        });
+
+        $("#nav-city").on('change', function() {
+            $.ajax({
+                url : MOD_PATH+'/gp/getAllSchool',
+                data : {
+                    'cId' : $("#nav-city").val()
+                },
+                success : function(data) {
+                    $("#nav-school").html(template('gp-select-tpl', {
+                        list : data
+                    }));
+                }
+            });
+        });
+
+        function seeDetail(data) {
+            $.post(CON_PATH+"/getUserDetail",{userId:data.id},function(res){
+                if(res.code==1){
+                    //0:待审核 1:审核通过 2:停用
+                    switch (res.data[0].status) {
+                        case "0":
+                            res.data[0].status="待审核";
+                            break;
+                        case "1":
+                            res.data[0].status="正常";
+                            break;
+                        case "2":
+                            res.data[0].status="停用";
+                            break;
+
+                        default:
+                            break;
+                    }
+                    //未知0,专科1,本科2,研究生3,研究生以上4
+
+                    switch (res.data[0].degree) {
+
+                        case '1':
+                            res.data[0].degree="专科";
+                            break;
+                        case '2':
+                            res.data[0].degree="本科";
+                            break;
+                        case '3':
+                            res.data[0].degree="研究生";
+                            break;
+                        case '4':
+                            res.data[0].degree="研究生以上";
+                            break;
+                        default:
+                            res.data[0].degree="未知";
+                            break;
+                    }
+
+                    switch(res.data[0].gender)
+                    {
+                        case '0':
+                            res.data[0].gender="女";
+                            break;
+                        case '1':
+                            res.data[0].gender="男";
+                            break;
+                        default:
+                            res.data[0].gender="未知";
+                            break;
+                    }
+
+                    $("#detailForm").html(template('formTemplate', res.data[0]));
+                    scrollToForm();
+                }else{
+                    modal_alert("获取用户详情失败");
+                }
+
+
+            });
+
+
+
+        }
+
+        function active(id) {
+            $.ajax(
+                    {
+                        url:CON_PATH+'/activeUser',
+                        data:{'id':id},
+                        success: function(data)
+                        {
+                            console.log("data is:"+data);
+                            if(data!=0)
+                            {
+                                modal_alert("用户启用成功！");
+                                $("#x-table").DataTable().ajax.reload();
+                            }
+                        },error:function()
+                    {
+                        modal_alert("没有启用成功!");
+
+                    }
+                    });
+
+        }
+
+        function refuse(id) {
+            $.ajax(
+                    {
+                        url:CON_PATH+'/freezeUser',
+                        data:{'id':id},
+                        success:function(data)
+                        {
+                            if(data!=0)
+                            {
+                                modal_alert("用户已被停用");
+                                $("#x-table").DataTable().ajax.reload();
+                            }
+                        }
+                    });
+        }
+
+        var table = $('#x-table').DataTable({
+            serverSide : true,
+            ajax : {
+                //指定数据源
+                url : CON_PATH+"/getCheckedUserData",
+
+            },
+            //每页显示三条数据
+            pageLength : 10,
+            "dom" : '<"top">it<"bottom"p><"clear">',
+            columns :
+                    [ {
+                        "data" : "id"
+                    }, {
+                        "data" : "username"
+                    }, {
+                        "data" : "realname"
+                    }, {
+                        "data" : "phone"
+                    }, {
+                        "data" : "gender"
+                    }, {
+                        "data" : "province"
+                    }, {
+                        "data" : "city"
+                    }, {
+                        "data" : "school"
+                    }, {
+                        "data" : "createtime"
+                    }, {
+                        "data" : "updatetime"
+                    } ],
+            "columnDefs" :
+                    [  {
+                        "targets" : 4,
+                        "render" : function(data, type, row) {
+
+                            if(data==null) return "未知";
+
+                            return data=="1"?"男":"女";
+                        }
+                    },{
+                        "targets" : 10,
+                        "render" : function(data, type, row) {
+                            return template("x-table-opt-tpl",row);
+                        }
+                    }, {
+                        "targets" :
+                                [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+                        "className" : "table-title"
+                    } ]
+        });
+        table.column(1).visible(false);
+
+        $('#x-table tbody').on('click', 'button', function() {
+            var data = table.row($(this).parents('tr')).data();
+
+
+            var action = $(this).attr("action");
+
+
+            var id = data["id"] || -1;
+
+
+            if (action == "seeDetail") {
+                seeDetail(data);
+                return;
+            }
+
+            if (action == "refuse") {
+                refuse(id);
+                return;
+            }
+            if (action == "active") {
+                active(id);
+                return;
+            }
+
+        });
+
+
+
+
+        $('#doSearch').on('click',
+                function() {
+
+                    var start = '00:00:00';
+                    var end = '23:59:59';
+
+                    var beginTime = $('#startDate').val();
+                    console.log('====' + beginTime + '----');
+                    if (!beginTime == '' || !beginTime == null) {
+
+                        beginTime = "'" + beginTime + ' ' + start + "'";
+                    }
+
+                    console.log(beginTime);
+
+                    var endTime = $('#endDate').val();
+
+                    if (!endTime == '' || !endTime == null) {
+                        endTime = "'" + endTime + ' ' + end + "'";
+                    }
+                    var status = 1;
+                    var province = $("#nav-province").val();
+                    var city = $("#nav-city").val();
+                    var school = $("#nav-school").val();
+                    var url = CON_PATH+"/searchByConditions?provinceId="
+                            + province + "&cityId=" + city + "&schoolId="
+                            + school + "&startTime=" + beginTime
+                            + "&endTime=" + endTime + "&status=" + status;
+                    console.log(beginTime+"-"+endTime+"-"+province+"-"+city+"-"+school);
+
+                    $('#x-table').DataTable().ajax.url(url).load();
+
+                });
+
+        $('#user-export').click(function(e) {
+
+            var start = '00:00:00';
+            var end = '23:59:59';
+
+            var beginTime = $('#startDate').val();
+            console.log('====' + beginTime + '----');
+            if (!beginTime == '' || !beginTime == null) {
+
+                beginTime = "'" + beginTime + ' ' + start + "'";
+            }
+
+            console.log(beginTime);
+
+            var endTime = $('#endDate').val();
+
+            if (!endTime == '' || !endTime == null) {
+                endTime = "'" + endTime + ' ' + end + "'";
+            }
+
+            var province = $("#nav-province").val();
+            var city = $("#nav-city").val();
+            var school = $("#nav-school").val();
+            var status = 1;
+            console.log(beginTime+"-"+endTime+"-"+province+"-"+city+"-"+school);
+            window.location = CON_PATH+"/export?provinceId="
+                    + province + "&cityId=" + city + "&schoolId="
+                    + school + "&startTime=" + beginTime
+                    + "&endTime=" + endTime + "&status=" + status;
+        });
+
+    });
+</script>
+
+
+
+</body>
+</html>
+

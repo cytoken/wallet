@@ -1,0 +1,183 @@
+<script type="text/html" id="tpl-index">
+    <div class="z_logo">
+        <img src="{{logoIcon}}" alt="logo">
+        <div style="text-align: center;">中文版</div>
+    </div>
+    <div class="list-block">
+        <ul class="z_input">
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><img src="{{phoneIcon}}" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="tel" placeholder="手机号" id="phone">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><img src="{{passwordIcon}}" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="password" placeholder="密码" id="password">
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="content-block">
+            <div class="row">
+                <div class="col-100"><a href="#" class="button button-big button-fill z_headBg" id="doLogin">登录</a>
+                </div>
+            </div>
+        </div>
+        <p id="goSignUp">没有帐号，前去注册</p>
+    </div>
+</script>
+<script type="text/html" id="tpl-signUp">
+    <div class="z_logo">
+        <img src="{{logoIcon}}" alt="logo">
+    </div>
+    <div class="list-block">
+        <ul class="z_input">
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><img src="{{phoneIcon}}" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="tel" placeholder="手机号" id="phone2">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><img src="{{passwordIcon}}" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="password" placeholder="密码" id="password2">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><img src="{{passwordIcon}}" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" placeholder="邀请码" id="inviteCode">
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="content-block">
+            <div class="row">
+                <div class="col-100"><a href="#" class="button button-big button-fill z_headBg" id="signUpBtn">注册</a>
+                </div>
+            </div>
+        </div>
+        <p id="goSignIn">已有帐号，前去登录</p>
+    </div>
+</script>
+<script type="text/html" id="tpl-userCenter">
+    <div class="z-bgPhoto z-pos-rel">
+        <img class="z-photo" src="/Public/wechat/images/cyt/pic_logo.png" alt="">
+        <div class="z-clearfix aui-border-t z-border-color">
+            <div class="aui-col-xs-6 aui-padded-5 aui-border-r z-border-deal">
+                <p class="aui-text-white">{{frozenAmount}}</p>
+                <p class="aui-text-white aui-ellipsis-1">冻结金额</p>
+            </div>
+            <div class="aui-col-xs-6 aui-padded-5 aui-border-r z-border-deal" style="background-image:none;">
+                <p class="aui-text-white">{{freeAmount}}</p>
+                <p class="aui-text-white aui-ellipsis-1">释放金额</p>
+            </div>
+        </div>
+        <img class="z-bgImg" src="/Public/wechat/images/cyt/pic_logo.png" alt="">
+    </div>
+    <div class="list-block">
+        <ul>
+            <li>
+                <a href="__APP__/Home/Index/address" class="item-link item-content">
+                    <div class="item-media"><img src="/Public/wechat/images/cyt/uIcon5.png" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-title">以太坊地址</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="__APP__/Home/Index/incomeList" class="item-link item-content">
+                    <div class="item-media"><img src="/Public/wechat/images/cyt/uIcon11.png" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-title">充值记录</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="__APP__/Home/Index/freeList" class="item-link item-content">
+                    <div class="item-media"><img src="/Public/wechat/images/cyt/uIcon12.png" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-title">释放记录</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="__APP__/Home/Index/memberList" class="item-link item-content">
+                    <div class="item-media"><img src="/Public/wechat/images/cyt/balanceChange_11.png" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-title">我的团队</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="__APP__/Home/Index/qrCode" class="item-link item-content">
+                    <div class="item-media"><img src="/Public/wechat/images/cyt/uIcon13.png" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-title">我的二维码</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="" class="item-link item-content" id="logout">
+                    <div class="item-media"><img src="/Public/wechat/images/cyt/logout.png" alt=""></div>
+                    <div class="item-inner">
+                        <div class="item-title">退出登录</div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</script>
+<script type="text/html" id="tpl-incomeList">
+    {{each data as value index}}
+        <div class="item-box z-clearfix">
+            <img src="/Public/wechat/images/cyt/balanceChange_1.png" alt="">
+            <div class="right">
+                <div><span>{{value.money}}</span><span class="fr" style="font-size: 0.6rem;">{{value.createTime}}</span></div>
+                <div style="font-size: 0.6rem;"><span>流水单号：{{value.orderNo}}</span><span style="float: right;">充值成功</span></div>
+            </div>
+        </div>
+    {{/each}}
+</script>
+<script type="text/html" id="tpl-freeList">
+    {{each data as value index}}
+        <div class="item-box z-clearfix">
+            <img src="/Public/wechat/images/cyt/balanceChange_29.png" alt="">
+            <div class="right">
+                <div><span>{{value.money}}</span><span class="fr" style="font-size: 0.6rem;">{{value.createTime}}</span></div>
+                <div style="font-size: 0.6rem;"><span>流水单号：{{value.orderNo}}</span><span style="float: right;">充值成功</span></div>
+            </div>
+        </div>
+    {{/each}}
+</script>
+<script type="text/html" id="tpl-memberList">
+    {{each data as value index}}
+        <div class="item-box z-clearfix">
+            <img src="/Public/wechat/images/cyt/pic_logo.png" alt="" style="padding: 0.5rem;border-radius:1.5rem;">
+            <div class="right">
+                <div><span style="line-height: 2rem;">{{value.phone}}</span></div>
+            </div>
+        </div>
+    {{/each}}
+</script>

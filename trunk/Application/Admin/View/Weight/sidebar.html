@@ -1,0 +1,113 @@
+<script src="__PUBLIC__/scripts/libs/template.js"></script>
+<script>
+	$(document).ready(function() {
+		var prev, curr;
+		var promise = new Promise(function (resolve, reject) {
+			$.get(MOD_PATH + "/Index/menu", function(res) {
+				res.data = res.data.map(function (data) {
+					data.isclose = location.pathname.indexOf(data.url) > -1 ? false : true;
+					if (!data.isclose) {
+						data.menus.map(function (menu) {
+							menu.pending = location.pathname.indexOf(menu.url) > -1 ? true : false;
+						});
+					}
+
+					return data;
+				});
+				var menu = template('menu-tpl',{ menus:res.data });
+				var sidebar = $('#x-sidebar');
+				sidebar.html(menu);
+				resolve();
+				sidebar.off('click').on('click', 'a:not([data-am-collapse])', function (e) {
+					e.preventDefault();
+
+					var url = null;
+					if (e.target.nodeName.toLowerCase() === 'span') {
+						curr = e.target.parentNode;
+					} else {
+						curr = e.target;
+					}
+
+					url = curr.getAttribute('href');
+					$('.am-datepicker,.am-dimmer').remove();
+
+					if (url === 'javascript:;') return;
+
+					storeURL2Session({
+						toUrl: url,
+						scroll: $('#admin-offcanvas')[0].scrollTop,
+						pending: 'a[href="' + $(curr).attr('href') + '"]',
+					});
+
+					// handle pending class
+					if (prev) {
+						Array.prototype.slice.call(prev.children).forEach(function (a) {
+							a.classList.remove('icon-pending');
+						});
+					}
+					Array.prototype.slice.call(curr.children).forEach(function (a) {
+						a.classList.add('icon-pending');
+					});
+
+					prev = curr;
+
+					console.warn('page change to: ' + url);
+					var box = $('.admin-content');
+					function animateBox(elem, className) {
+						return new Promise(function (resolve, reject) {
+							elem.addClass(className);
+							animatePromise(elem).then(function () {
+								elem.removeClass(className);
+								resolve();
+							});
+						});
+					}
+					function animatePromise(elem) {
+						return new Promise(function (resolve, reject) {
+							setTimeout(resolve, 300);
+						});
+					}
+					animateBox(box, 'from-center-to-left').then(function () {
+						$.when(box.empty().load(url)).then(function () {
+							animateBox(box, 'from-right-to-center');
+						});
+					});
+				});
+
+				//handle logout
+				var sidebarLogout = $('a[href="/index.php/Home/User/logout"]');
+				sidebarLogout.attr('href', 'javascript:;').click(function (e) {
+					$('#my-confirm').modal({
+				        relatedTarget: sidebarLogout,
+				        onConfirm: function (options) {
+				        	location.href = '__MODULE__/User/logout';
+				        }
+				    });
+				});
+			});
+		});
+
+		restoreSession();
+
+		function restoreSession() {
+			var obj = null, toUrL = null, scroll = 0, pending = null;
+			if (obj = sessionStorage.getItem('admin')) {
+				obj = JSON.parse(obj);
+				console.warn(obj);
+				toUrl = obj.toUrl; scroll = obj.scroll, pending = obj.pending;
+				$('.admin-content').empty().load(toUrl);
+				promise.then(function () {
+					pending = $(pending);
+					pending.children().addClass('icon-pending');
+					pending.parents('ul.am-list').prev('a').click();
+					prev = pending[0];
+					$('#admin-offcanvas')[0].scrollTop = scroll;
+				});
+			}
+		}
+
+		function storeURL2Session(detail) {
+			return sessionStorage.setItem('admin', JSON.stringify(detail));
+		}
+	});
+</script>

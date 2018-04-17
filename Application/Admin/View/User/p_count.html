@@ -1,0 +1,91 @@
+
+<!doctype html>
+<html class="no-js fixed-layout">
+<head>
+	<include file="Common/meta"/>
+	<title>首页 | 萝卜兼职</title>
+	<include file="Common/header"/>
+	<include file="Common/modal"/>
+	<include file="Template/tpl-menu"/>
+	<style>
+		#x-detail {
+			display: none;
+		}
+		#slider,#slider_user,#slider_job {
+			width: 100%;
+			margin: 30px auto 0 auto;
+		}
+		#collapse-panel-pv {
+			height: 550px;
+		}
+		.div_hide{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器， 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+	以获得更好的体验！</p>
+<![endif]-->
+<header class="am-topbar am-topbar-inverse admin-header">
+	<button
+			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+			data-am-collapse="{target: '#topbar-collapse'}">
+		<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
+	</button>
+
+	<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+		<include file="Weight/topbar"/>
+	</div>
+</header>
+
+<div class="am-cf admin-main">
+	<!-- sidebar start -->
+	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+		<div class="am-offcanvas-bar admin-offcanvas-bar">
+			<ul class='am-list admin-sidebar-list' id="x-sidebar">
+				<include file="Weight/sidebar"/>
+			</ul>
+			<div class="am-panel am-panel-default admin-sidebar-panel">
+				<div class="am-panel-bd">
+					<p><span class="am-icon-bookmark"></span>公告</p>
+					<p>捷城管理系统v1.0！ </p>
+				</div>
+			</div>
+
+			<div class="am-panel am-panel-default admin-sidebar-panel">
+				<div class="am-panel-bd">
+					<p>
+						<span class="am-icon-tag"></span> wiki
+					</p>
+					<p>更多7*24技术支持， jiechengkeji.cn。</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- sidebar end -->
+
+	<!-- content start -->
+	<div class="admin-content">
+		<div class="admin-content-body">
+
+		</div>
+
+		<footer class="admin-content-footer">
+			<hr>
+			<p class="am-padding-left">© 2016-2026 威海捷城信息技术有限公司版权所有。</p>
+		</footer>
+	</div>
+	<!-- content end -->
+
+</div>
+
+<a href="#"
+   class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+   data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+<include file="Common/footer"/>
+<script type="text/javascript" src="__PUBLIC__/scripts/index/index.js"></script>
+<script src="/Public/scripts/index/createChart.js"></script>
+</body>
+</html>
